@@ -23,5 +23,18 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$" />
+          <root url="file://$MODULE_DIR$" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/GasifyProyect/src" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
