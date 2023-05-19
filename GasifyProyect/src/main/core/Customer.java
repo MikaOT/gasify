@@ -2,30 +2,46 @@ package main.core;
 
 public class Customer {
 
-    private String name;
-    private String dni;
+    private String idCustomer;
+    private String nameCustomer;
+    private String numberPhone;
     private String address;
 
-    public Customer(String name, String dni, String address) {
-        this.name = name;
-        this.dni = dni;
+    public Customer(String idCustomer,String nameCustomer, String numberPhone, String address) {
+        this.idCustomer = idCustomer;
+        this.nameCustomer=nameCustomer;
+        this.numberPhone = numberPhone;
         this.address = address;
     }
 
-    public String getName() {
-        return name;
+    public Customer() {
+
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameCustomer(String nameCustomer){
+
+        this.nameCustomer= nameCustomer;
     }
 
-    public String getDni() {
-        return dni;
+    public String getNameCustomer(){
+
+        return this.nameCustomer;
+    }
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
+
+    }
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
     }
 
     public String getAddress() {
@@ -36,11 +52,11 @@ public class Customer {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
+
+    public String toStringCustomer () {
         return "Customer{" +
-                "name='" + name + '\'' +
-                ", dni='" + dni + '\'' +
+                "idCustomer='" + idCustomer + '\'' +
+                ", numberPhone='" + numberPhone + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }
