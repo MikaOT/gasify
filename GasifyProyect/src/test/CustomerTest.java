@@ -7,13 +7,23 @@ import org.junit.jupiter.api.Test;
 public class CustomerTest {
 
 
-    @Test
-    void CustomerNAme(){
+  @Test
+  void ValidateNewCustomer () {
 
-        Customer customer1 = new Customer("Daniel","76787654X","Santander");
-        String nombreCustomer1 = customer1.getName();
-        Assertions.assertEquals(nombreCustomer1,"Daniel");
+    Customer Customer1 = new Customer();
+    Customer1.setIdCustomer("0001");
+    Assertions.assertEquals(Customer1.getIdCustomer(), "0001");
 
-    }
+  }
+
+
+  @Test
+  void ValidateNameCustomer () {
+
+    Customer Customer1 = new Customer("312","Pedro","667874934","Peñacastillo");
+
+    Assertions.assertEquals(Customer1.getNameCustomer(), "Pedro");
+
+  }
 
 }
