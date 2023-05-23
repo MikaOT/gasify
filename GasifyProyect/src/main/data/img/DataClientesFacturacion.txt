@@ -1,6 +1,0 @@
-id_report; id_cliente; id_contador; localizacion; numeroSim; id_automatizacion; valor_de_lectura; fecha_valor_lectura
-
-1,0001,0003,C/ El campón nº 2 - 2izq,687226753,0002,4239847,02/05/2023
-2,0003,0001,C/ El campón nº 2 - 1izq,783449823,0003,5489329,02/05/2023
-3,0002,0002,C/ El campón nº 2 - 1dcha,674832938,0001,4320450,03/05/2023
-4,0005,0123,C/ El campón nº 2 - 2dcha,743809203,0439,4839284,01/05/2023

@@ -1,0 +1,5 @@
+idCustomer;numberPhone;address;
+
+72171365X,687220274,Calle Camarreal 1
+50394857E,664351012,Calle Peña Herbosa 23
+72438457X,666778833,Plaza Ayuntamiento 2

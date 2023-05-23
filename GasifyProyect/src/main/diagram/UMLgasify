@@ -3,104 +3,104 @@
 
 @startuml
 
-abstract class User {
+       abstract class User {
 
-- nameUser: String
-- login : String
-- password : String
+       - nameUser: String
+       - login : String
+       - password : String
 
-+ void toStringUser : String
-+ abstract GetterySetter
+       + void toStringUser : String
+       + abstract GetterySetter
 
-}
+       }
 
-class RegularUser {
+       class RegularUser {
 
-+ toStringRegularUser : String
-+ RegularUser(parametros)
-+ RegularUser()
+       + toStringRegularUser : String
+       + RegularUser(parametros)
+       + RegularUser()
 
-}
+       }
 
-class AdminUser {
+       class AdminUser {
 
--isAdmin:Boolean
-+ void isAdmin
-+ toStringAdminUser : String
+       -isAdmin:Boolean
+       + void isAdmin
+       + toStringAdminUser : String
 
-+ AdminUser(parametros)
-+ AdminUser()
+       + AdminUser(parametros)
+       + AdminUser()
 
 
-}
+       }
 
-User <|-- RegularUser
-User <|-- AdminUser
+       User <|-- RegularUser
+       User <|-- AdminUser
 
-class Customer {
+       class Customer {
 
-- id_cliente :String
-- numberPhone :String
-- address : String
-+ GetterySetter : String
-+ toStringCustomer : String
-+ Customer (parametros)
-+ Customer ()
+       - id_cliente :String
+       - numberPhone :String
+       - address : String
+       + GetterySetter : String
+       + toStringCustomer : String
+       + Customer (parametros)
+       + Customer ()
 
-}
+       }
 
-class Employee{
+       class Employee{
 
--id_employee:String
-- nameCompany : String
-- area: String
-+ toStringEmployee: String
-+ GetterySetter
+       -id_employee:String
+       - nameCompany : String
+       - area: String
+       + toStringEmployee: String
+       + GetterySetter
 
-+ Employee(parametros)
-+ Employee ()
-}
+       + Employee(parametros)
+       + Employee ()
+       }
 
-RegularUser <|-- Customer
-AdminUser <|-- Employee
+       RegularUser <|-- Customer
+       AdminUser <|-- Employee
 
-class GasMeter{
+       class GasMeter{
 
-- idGasMeter :String
-- nameModel : String
-- readInstallationDay : int
-- currentReading : int
-+ getterYSetter
-+ toStringGasMeter
-+ GasMeter(parametros)
-+ GasMeter()
-}
+       - idGasMeter :String
+       - nameModel : String
+       - readInstallationDay : int
+       - currentReading : int
+       + getterYSetter
+       + toStringGasMeter
+       + GasMeter(parametros)
+       + GasMeter()
+       }
 
-class Plc {
+       class Plc {
 
-- idPlc: String
-- modelPlc :String
+       - idPlc: String
+       - modelPlc :String
 
-+ getterYSetter
-+ toStringPlc
-+ Plc (param)
-+ Plc ()
-}
+       + getterYSetter
+       + toStringPlc
+       + Plc (param)
+       + Plc ()
+       }
 
-class DataSim {
+       class DataSim {
 
-- idDataSim :String
-- numberDataSim : String
-- servicesCompany : String
-}
+       - idDataSim :String
+       - numberDataSim : String
+       - servicesCompany : String
+       }
 
-class HttpRequest {
+       class HttpRequest {
 
-- ArrayList <> pricesMeter : String
+       - ArrayList <> pricesMeter : String
 
-+ getHttpRequest
+       + getHttpRequest
 
-+ toStringPriceMeter
-}
+       + toStringPriceMeter
+       }
 
-@enduml
+       @enduml
