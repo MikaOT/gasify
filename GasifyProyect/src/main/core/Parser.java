@@ -2,5 +2,10 @@ package main.core;
 
 public interface Parser {
 
-    void ordenar ();
+
+
+    void parserCustomer();
+    void parserDataSim();
+
+    void parserGasMater();
 }

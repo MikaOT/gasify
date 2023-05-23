@@ -3,15 +3,34 @@ package main.core;
 public class Plc {
 
     private String idPlc;
-    private String modelPlc;
+    private String maker;
+    private String model;
 
-    public Plc(String idPlc, String modelPlc) {
+    public Plc(String idPlc, String maker,String model) {
         this.idPlc = idPlc;
-        this.modelPlc = modelPlc;
+        this.maker = maker;
+        this.model=model;
+
     }
 
     public Plc() {
 
+    }
+
+    public String getMaker() {
+        return maker;
+    }
+
+    public void setMaker(String maker) {
+        this.maker = maker;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public String getIdPlc() {
@@ -22,19 +41,13 @@ public class Plc {
         this.idPlc = idPlc;
     }
 
-    public String getModelPlc() {
-        return modelPlc;
-    }
-
-    public void setModelPlc(String modelPlc) {
-        this.modelPlc = modelPlc;
-    }
 
 
     public String toStringPlc() {
         return "Plc{" +
                 "idPlc='" + idPlc + '\'' +
-                ", modelPlc='" + modelPlc + '\'' +
+                ", maker='" + maker + '\'' +
+                ", model='" + model + '\'' +
                 '}';
     }
 }
