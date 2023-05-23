@@ -1,0 +1,13 @@
+idEmployee;nameCompany;area
+EMP-483274,Naturgy,Marketing
+EMP-483254,Naturgy,Técnico
+EMP-483234,Naturgy,Facturación
+EMP-003274,Naturgy,Marketing
+EMP-043274,Naturgy,IT
+EMP-483543,Naturgy,Operaciones
+EMP-423274,Naturgy,Facturación
+EMP-563274,Naturgy,Mantenimiento
+EMP-653274,Naturgy,Outsourcing
+EMP-645274,Naturgy,Financiero
+EMP-123345,Naturgy,RRHH
+EMP-543543,Naturgy,Técnico

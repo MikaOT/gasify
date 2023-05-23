@@ -1,15 +1,15 @@
-import main.utils.FetchGasPrices;
-import main.utils.HttpRequest;
+import main.utils.FileReader;
 
 import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
 
-        FetchGasPrices prices = new FetchGasPrices();
+        FileReader br = new FileReader();
 
-        System.out.println(prices.fetchAPI());
+        br.fileReading();
+
 
     }
 }
