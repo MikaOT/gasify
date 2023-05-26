@@ -13,11 +13,12 @@ public class FileReader { // Clase para leer
     public FileReader() {
 
         filesData=new ArrayList<>();
-        filesData.add(0,"main/data/txt/Customers.txt");
-        filesData.add(1,"main/data/txt/dataSims.txt");
-        filesData.add(2,"main/data/txt/gasMaters.txt");
-        filesData.add(3,"main/data/txt/Plcs.txt");
-        filesData.add(4,"main/data/txt/DataClientesFacturacion.txt");
+        filesData.add(0,"GasifyProyect/src/main/data/txt/Customers.txt");
+        filesData.add(1,"GasifyProyect/src/main/data/txt/DataClientesFacturacion.txt");
+        filesData.add(2,"GasifyProyect/src/main/data/txt/gasMaters.txt");
+        filesData.add(3,"GasifyProyect/src/main/data/txt/Plcs.txt");
+        filesData.add(4,"GasifyProyect/src/main/data/txt/dataSims.txt");
+        filesData.add(5,"GasifyProyect/src/main/data/txt/workers.txt");
 
         BD = new ArrayList<>();
 
@@ -25,13 +26,11 @@ public class FileReader { // Clase para leer
 
 
     //Este metodo nos permite con el parametro cargar la ruta de los archivos
-    public ArrayList<String> fileReading(){
+    public ArrayList<String> fileReading(String path){
 
-        for (int i =0; i<filesData.size();i++) {
 
-            String path = filesData.get(i);
             File file = new File(path);
-            List<String> data = new ArrayList<String>();
+            ArrayList<String> data = new ArrayList<String>();
             BufferedReader in = null;
             try {
                 in = new BufferedReader(new java.io.FileReader(file));
@@ -57,18 +56,27 @@ public class FileReader { // Clase para leer
                 }
             }
             System.out.println(data.size() + " elements loaded.");
-            for (String datos : data) {
+           /* for (String datos : data) {
 
                 //dataBBDD.add(data.toString());
                 System.out.println(datos);
-                BD.add(data.toString());
-            }
-            return (ArrayList<String>) data;
-        }
 
-            return BD;
+            }*/
+
+            return data;
     }
 
+    @Override
+    public String toString() {
+        return "FileReader{" +
+                "BD=" + BD +
+                '}';
+    }
+
+    public ArrayList<String> getBD(){
+
+        return BD;
+        }
 
 
 }

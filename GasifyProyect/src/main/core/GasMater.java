@@ -3,15 +3,21 @@ package main.core;
 public class GasMater {
 
     private String idGasMater;
+    private String brand;
+    private String ref;
+    private String ean13;
+    private String serie;
     private String nameModel;
     private int readInstallationDay;
-    private int currentReading;
 
-    public GasMater(String idGasMater, String nameModel, int readInstallationDay, int currentReading) {
+    public GasMater(String idGasMater, String brand, String ref, String ean13, String serie, int readInstallationDay ) {
         this.idGasMater = idGasMater;
-        this.nameModel = nameModel;
+        this.brand=brand;
+        this.ref=ref;
+        this.ean13=ean13;
+        this.serie=serie;
         this.readInstallationDay = readInstallationDay;
-        this.currentReading = currentReading;
+
     }
 
     public GasMater() {
@@ -26,8 +32,36 @@ public class GasMater {
         this.idGasMater = idGasMater;
     }
 
-    public String getNameModel() {
-        return nameModel;
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
+
+    public String getEan13() {
+        return ean13;
+    }
+
+    public void setEan13(String ean13) {
+        this.ean13 = ean13;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
     public void setNameModel(String nameModel) {
@@ -42,21 +76,16 @@ public class GasMater {
         this.readInstallationDay = readInstallationDay;
     }
 
-    public int getCurrentReading() {
-        return currentReading;
-    }
-
-    public void setCurrentReading(int currentReading) {
-        this.currentReading = currentReading;
-    }
-
 
     public String toStringGasMater() {
         return "GasMater{" +
                 "idGasMater='" + idGasMater + '\'' +
-                ", nameModel='" + nameModel + '\'' +
+                ", brand='" + brand + '\'' +
+                ", ref='" + ref + '\'' +
+                ", ean13='" + ean13 + '\'' +
+                ", serie='" + serie + '\'' +
+
                 ", readInstallationDay=" + readInstallationDay +
-                ", currentReading=" + currentReading +
                 '}';
     }
 }

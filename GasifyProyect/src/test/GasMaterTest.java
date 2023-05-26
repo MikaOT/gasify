@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 public class GasMaterTest {
 
     @Test
-    void getNameModel (){
+    void getBrand (){
 
-        GasMater gasMater1 = new GasMater("0001","Siemens",12834,0);
-
-        Assertions.assertEquals(gasMater1.getNameModel(),"Siemens");
+        GasMater gasMater1 = new GasMater();
+        gasMater1.setBrand("Prueba");
+        Assertions.assertEquals(gasMater1.getBrand(),"Prueba");
     }
 
     @Test
