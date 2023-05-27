@@ -25,7 +25,7 @@ public class Worker {
                 "idEmployee='" + idEmployee + '\'' +
                 ", name='" + name + '\'' +
                 ", nameCompany='" + nameCompany + '\'' +
-                ", area='" + area + '\'' +
+                ", area='" + department + '\'' +
                 '}';
     }
 

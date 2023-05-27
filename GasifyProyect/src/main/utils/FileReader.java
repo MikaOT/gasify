@@ -6,80 +6,61 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReader { // Clase para leer
+public class FileReader {
 
-        ArrayList<String> filesData;
-        ArrayList<String> BD;
+    ArrayList<String> filesData;
+    ArrayList<String> BD;
+
     public FileReader() {
 
-        filesData=new ArrayList<>();
-        filesData.add(0,"GasifyProyect/src/main/data/txt/Customers.txt");
-        filesData.add(1,"GasifyProyect/src/main/data/txt/DataClientesFacturacion.txt");
-        filesData.add(2,"GasifyProyect/src/main/data/txt/gasMaters.txt");
-        filesData.add(3,"GasifyProyect/src/main/data/txt/Plcs.txt");
-        filesData.add(4,"GasifyProyect/src/main/data/txt/dataSims.txt");
-        filesData.add(5,"GasifyProyect/src/main/data/txt/workers.txt");
+        filesData = new ArrayList<>();
+
+        filesData.add(0,"./src/main/data/txt/Customers.txt");
+        filesData.add(1,"./src/main/data/txt/CustomerBilling.json");
+        filesData.add(2,"./src/main/data/txt/gasMaters.json");
+        filesData.add(3,"./src/main/data/txt/Plcs.json");
+        filesData.add(4,"./src/main/data/txt/dataSims.json");
+        filesData.add(5,"./src/main/data/txt/workers.json");
 
         BD = new ArrayList<>();
 
     }
 
-
     //Este metodo nos permite con el parametro cargar la ruta de los archivos
     public ArrayList<String> fileReading(String path){
 
+        File file = new File(path);
+        ArrayList<String> data = new ArrayList<>();
+        BufferedReader in = null;
 
-            File file = new File(path);
-            ArrayList<String> data = new ArrayList<String>();
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new java.io.FileReader(file));
-                while (in.ready()) {
-                    String line = in.readLine();
-                    if (line.length() > 0) {
-                        data.add(line);
+        try {
 
+            in = new BufferedReader(new java.io.FileReader(file));
 
-                    }
-                }
-                data.remove(0); //Me elimina los encabezados de las columnas
-
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        System.err.println(e.getMessage());
-                    }
+            while (in.ready()) {
+                String line = in.readLine();
+                if (line.length() > 0) {
+                    data.add(line);
                 }
             }
-            System.out.println(data.size() + " elements loaded.");
-           /* for (String datos : data) {
 
-                //dataBBDD.add(data.toString());
-                System.out.println(datos);
+            data.remove(0); //Deletes the header
 
-            }*/
-
-            return data;
-    }
-
-    @Override
-    public String toString() {
-        return "FileReader{" +
-                "BD=" + BD +
-                '}';
-    }
-
-    public ArrayList<String> getBD(){
-
-        return BD;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
         }
+        System.out.println(data.size() + " elements loaded.");
+
+        return data;
+    }
 
 
 }
-
-
-

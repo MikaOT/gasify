@@ -52,6 +52,30 @@ public class Customer {
         this.address = address;
     }
 
+    public String getPlcId() {
+        return plcId;
+    }
+
+    public void setPlcId(String plcId) {
+        this.plcId = plcId;
+    }
+
+    public String getSimId() {
+        return simId;
+    }
+
+    public void setSimId(String simId) {
+        this.simId = simId;
+    }
+
+    public String getGasMaterID() {
+        return gasMaterID;
+    }
+
+    public void setGasMaterID(String gasMaterID) {
+        this.gasMaterID = gasMaterID;
+    }
+
 
     @Override
     public String toString() {
