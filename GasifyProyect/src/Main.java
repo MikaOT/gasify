@@ -15,6 +15,11 @@ public class Main {
         //FileReaderV2 br = new FileReaderV2();
         //ArrayList<String> prueba = br.fileReading("./src/main/data/txt/customers.json");
 
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //LocalDate date = LocalDate.parse("05/06/2023", formatter);
+        //System.out.println(date);
+
+
 /*
         ParseData data = new ParseData();
 

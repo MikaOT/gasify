@@ -1,24 +1,51 @@
 package main.core;
 
+import main.utils.DateValidator;
 import main.utils.ParseData;
 
-import javax.swing.text.DateFormatter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Data {
+public class Data extends ParseData {
 
+    DateValidator fullDate;
+    DateValidator monthYear;
+    DateValidator format;
 
     public Data() {
-        this.data = new ParseData();
+        fullDate = new DateValidator("dd/MM/yyyy");
+        monthYear = new DateValidator("MM/yyyy");
     }
+
+    public List<DataSim> findSimDataByID(String customerId) {
+
+        List <Customer> customer = findCustomerByID(customerId);
+        List <DataSim> filter = new ArrayList<>();
+
+        if (customer.size() > 0) {
+            for (Customer user : customer) {
+                List<GasMater> gasData = findGasMeter(user.getGasMaterID());
+                if (gasData.size() > 0) {
+                    for (GasMater gas : gasData) {
+                        String plcID = gas.getPlcId();
+                        List<Plc> plcData = findPlc(plcID);
+                        if (plcData.size() > 0) {
+                            for (Plc plc : plcData) {
+                                String simId = plc.getSimDataId();
+                                List<DataSim> simData = findSim(simId);
+                                filter.addAll(simData);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return filter;
+    }
+
+    // #################################### General Data search methods ########################################
 
     // 01/01/2022 hasta 01/12/2030
     public long diffDate (String date1, String date2) {
@@ -43,81 +70,29 @@ public class Data {
         return date.split("/");
     }
 
-    // @@ https://stackoverflow.com/questions/26075490/filter-an-arraylist-with-dates-by-start-and-end-time
-    // @@ https://stackoverflow.com/questions/13037654/subtract-two-dates-in-java
-    
-    //Filtro le pasas un CustomerId y un intervalo de fechas y te devuelve toda la info respecto al usuario
-    public List<Billing> monthlyBill (String customerId, String firstDate, String secondDate) throws IOException {
 
-        List<Billing> filtro = new ArrayList<>();
 
-        List<Billing> getUser = findBillingByUser(customerId);
-
-        for (Billing user : getUser) {
-
-            LocalDate enteredFirstDate = LocalDate.parse(firstDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            LocalDate userFirstDate = LocalDate.parse(user.getFirstDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            LocalDate enteredSecondDate = LocalDate.parse(secondDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            LocalDate userSecondDate = LocalDate.parse(user.getSecondDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-            if ((userFirstDate.isEqual(enteredFirstDate) || userFirstDate.isAfter(enteredFirstDate)) && (userSecondDate.isEqual(enteredSecondDate) || userSecondDate.isBefore(enteredSecondDate))) {
-                filtro.add(user);
-            }
-        }
-
-        return filtro;
-
-    }
+    // #################################### Customer Data search methods ########################################
 
     // @@ https://stackoverflow.com/questions/18410035/ways-to-iterate-over-a-list-in-java
 
-    public List<Billing> findBillingByUser (String customerID) throws IOException {
+    public List<Billing> findBillingByUser (String customerID) {
 
         ArrayList<Billing> filter = new ArrayList<>();
 
-        for (Billing billding : data.billingData()) {
-            if (billding.getIdCustomer().equalsIgnoreCase(customerID)) {
-                filter.add(billding);
+        if (billingData() != null) {
+            for (Billing billding : billingData()) {
+                if (billding.getIdCustomer().equalsIgnoreCase(customerID)) {
+                    filter.add(billding);
+                }
             }
+            if (filter.size() == 0) System.err.println("User without associated billing!");
         }
 
         return filter;
-
     }
 
-    public int difValues (String customerID, String mes) throws IOException {
-
-
-        List<Billing> filter = findBillingByUser(customerID);
-
-
-        // Si no encuentra customer con un billing disponible
-
-        int value1 = filter.get(0).getFirstValue();
-        int value2 = filter.get(0).getSecondValue();
-
-
-        int result = value2 - value1;
-        return result;
-
-    }
-
-
-
-    public List<Customer> findCustomerByNumber (String numberPhone) throws IOException {
-
-        ArrayList<Customer> filter = new ArrayList<>();
-
-        for (Customer customer : data.customerData()) {
-            if (customer.getNumberPhone().equalsIgnoreCase(numberPhone)) {
-                filter.add(customer);
-            }
-        }
-
-        return filter;
-
-    }
-    public List<GasMater> findGasMeter(String gasMeterId) throws IOException {
+    public List<GasMater> findGasMeter(String gasMeterId) {
 
         ArrayList<GasMater> filter = new ArrayList<>();
 
@@ -135,88 +110,98 @@ public class Data {
 
         ArrayList<DataSim> filter = new ArrayList<>();
 
-        for (DataSim sim : data.simData()) {
-            if (sim.getIdDataSim().equalsIgnoreCase(simId)) {
-                filter.add(sim);
+        if (simData() != null) {
+            for (DataSim sim : simData()) {
+                if (sim.getIdDataSim().equalsIgnoreCase(simId)) {
+                    filter.add(sim);
+                }
             }
+            if (filter.size() == 0) System.err.println("SIM ID not found!");
         }
-
         return filter;
 
     }
 
-    public List<Plc> findPlc(String plcId) throws IOException {
+    public List<Plc> findPlc(String plcId) {
 
         ArrayList<Plc> filter = new ArrayList<>();
 
-        for (Plc plc : data.plcData()) {
-            if (plc.getIdPlc().equalsIgnoreCase(plcId)) {
-                filter.add(plc);
+        if (plcData() != null) {
+            for (Plc plc : plcData()) {
+                if (plc.getIdPlc().equalsIgnoreCase(plcId)) {
+                    filter.add(plc);
+                }
             }
+            if (filter.size() == 0) System.err.println("PLC ID not found!");
         }
 
         return filter;
-
     }
 
-    public String findSimNumber(String customerId) throws IOException { // to do Exception
+    // ####################################### Customer search methods ###########################################
 
+    /*         #### Find a customer by the name ####
+    * @param name - Name of the client set in the client JSON list.
+    * @return A list of users matching the entered name.
+    */
 
-        List <Customer> cus = findCustomerByID(customerId);
-
-        String customerGasId = (cus.size() > 0)
-                ? cus.get(0).getGasMaterID()
-                : null;
-
-        if (customerGasId != null) {
-
-            List<GasMater> gas = findGasMeter(customerGasId);
-
-            // excepción si no encuentra un usuario asociado con un GasMeter
-
-            String plcID = gas.get(0).getPlcId();
-
-            List<Plc> plc = findPlc(plcID);
-
-            String plcGetSim = plc.get(0).getSimDataId();
-
-            List<DataSim> sim = findSim(plcGetSim);
-
-            return sim.get(0).getNumberDataSim();
-        }
-
-        return null;
-
-    }
-
-    public List<Customer> findCustomerByName(String name) throws IOException {
+    public List<Customer> findCustomerByName(String name) {
 
         ArrayList<Customer> filter = new ArrayList<>();
 
-        for (Customer customer : data.customerData()) {
-            if (customer.getNameCustomer().toLowerCase().contains(name.toLowerCase())) {
-                filter.add(customer);
+        if (customerData() != null) {
+            for (Customer customer : customerData()) {
+                if (customer.getNameCustomer().toLowerCase().contains(name.toLowerCase())) {
+                    filter.add(customer);
+                }
             }
+            if (filter.size() == 0) System.err.println("User(s) not found!");
         }
 
         return filter;
-
     }
 
-    public List<Customer> findCustomerByID(String ID) throws IOException {
+    /*         #### Find a customer by the ID (DNI) ####
+     * @param ID - ID of the client set in the client JSON list.
+     * @return A list of users matching the entered ID.
+     */
+
+    public List<Customer> findCustomerByID(String ID) {
 
         ArrayList<Customer> filter = new ArrayList<>();
 
-        for (Customer customer : data.customerData()) {
-            if (customer.getIdCustomer().equalsIgnoreCase(ID)) {
-                filter.add(customer);
+        if (customerData() != null) {
+            for (Customer customer : customerData()) {
+                if (customer.getIdCustomer().equalsIgnoreCase(ID)) {
+                    filter.add(customer);
+                }
             }
+            if (filter.size() == 0) System.err.println("ID not found!");
+            if (filter.size() > 1) System.err.println("More than one client associated with the same ID has been found!");
         }
 
-        return filter;
 
+
+        return filter;
     }
 
+    /*         #### Find a customer by the Number Phone ####
+     * @param numberPhone - Number Phone of the client set in the client JSON list.
+     * @return A list of users matching the entered Number Phone.
+     */
 
+    public List<Customer> findCustomerByNumber(String numberPhone) {
 
+        ArrayList<Customer> filter = new ArrayList<>();
+
+        if (customerData() != null) {
+            for (Customer customer : customerData()) {
+                if (customer.getNumberPhone().equalsIgnoreCase(numberPhone)) {
+                    filter.add(customer);
+                }
+            }
+            if (filter.size() == 0) System.err.println("Customer associated to the entered number not found!");
+        }
+        return filter;
+    }
 }

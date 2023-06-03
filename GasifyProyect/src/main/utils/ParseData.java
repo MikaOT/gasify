@@ -9,54 +9,81 @@ import java.util.List;
 
 public class ParseData {
 
-    // @@ https://stackoverflow.com/questions/35034367/convert-json-array-to-java-class-object-list
-    public List<Billing> billingData() throws IOException { //Si queremos los clientes necesitamos llamar a ese metodo
+    private FileReader file;
+    private Gson gson;
+    private String data;
+    public ParseData(){
+        file = new FileReader();
+        gson = new Gson();
+    }
 
-        JSONReader file = new JSONReader();
-        String data = file.readAsString("./src/main/data/txt/CustomerBilling.json");
+    /*
+    #########################################################
+    Class to collect JSON files and parse them into an array,
+    the information is parameterized based on the classes in the Core folder.
+    @@ URL: https://stackoverflow.com/questions/35034367/convert-json-array-to-java-class-object-list
+    #################################################################################################
+    */
+    public List<Billing> billingData() {
 
-        Gson gson = new Gson();
-
+        data = null;
         List<Billing> billingToDate;
-        billingToDate = Arrays.asList(gson.fromJson(data, Billing[].class));
-        return billingToDate;
 
+        try {
+            data = file.readAsString("./src/main/data/txt/CustomerBilling.json");
+            billingToDate = Arrays.asList(gson.fromJson(data, Billing[].class));
+            return billingToDate;
 
+        } catch (IOException e) {
+            System.err.println("CustomerBilling.json not found!");
+        }
+        return null;
     }
-    public List<Customer> customerData() throws IOException { //Si queremos los clientes necesitamos llamar a ese metodo
 
-        JSONReader file = new JSONReader();
-        String data = file.readAsString("./src/main/data/txt/customers.json");
+    public List<Customer> customerData() {
 
-        Gson gson = new Gson();
+        data = null;
         List<Customer> allCustomers;
-        allCustomers = Arrays.asList(gson.fromJson(data, Customer[].class));
-        return allCustomers;
 
+        try {
+            data = file.readAsString("./src/main/data/txt/customers.json");
+            allCustomers = Arrays.asList(gson.fromJson(data, Customer[].class));
+            return allCustomers;
+
+        } catch (IOException e){
+            System.err.println("Customer.json not found!");
+        }
+        return null;
     }
 
-    public List<DataSim> simData() throws IOException { // To do Exception
+    public List<DataSim> simData() {
 
-        JSONReader file = new JSONReader();
-        String data = file.readAsString("./src/main/data/txt/dataSims.json");
-
-        Gson gson = new Gson();
+        data = null;
         List<DataSim> allDataSims;
-        allDataSims = Arrays.asList(gson.fromJson(data, DataSim[].class));
-        return allDataSims;
 
+        try {
+            data = file.readAsString("./src/main/data/txt/dataSims.json");
+            allDataSims = Arrays.asList(gson.fromJson(data, DataSim[].class));
+            return allDataSims;
+        }catch(IOException e){
+            System.err.println("dataSims.json not found!");
+        }
+        return null;
     }
 
-    public List<GasMater> gasMaterData() throws IOException { // To do Exception
+    public List<GasMater> gasMaterData() {
 
-        JSONReader file = new JSONReader();
-        String data = file.readAsString("./src/main/data/txt/gasMaters.json");
-
-        Gson gson = new Gson();
+        data = null;
         List<GasMater> allGasMater;
-        allGasMater = Arrays.asList(gson.fromJson(data, GasMater[].class));
-        return allGasMater;
 
+        try {
+            data = file.readAsString("./src/main/data/txt/gasMaters.json");
+            allGasMater = Arrays.asList(gson.fromJson(data, GasMater[].class));
+            return allGasMater;
+        }catch(IOException e){
+            System.err.println("gasMaters.json not found!");
+        }
+        return null;
     }
 
     public List<Plc> plcData() throws IOException { // To do Exception
@@ -71,15 +98,34 @@ public class ParseData {
 
     }
 
-    public List<Worker> workerData() throws IOException { // To do Exception
+    public List<Worker> workerData() {
 
-        JSONReader file = new JSONReader();
-        String data = file.readAsString("./src/main/data/txt/workers.json");
-
-        Gson gson = new Gson();
+        data = null;
         List<Worker> allWorkers;
-        allWorkers = Arrays.asList(gson.fromJson(data, Worker[].class));
-        return allWorkers;
+
+        try {
+            data = file.readAsString("./src/main/data/txt/workers.json");
+            allWorkers = Arrays.asList(gson.fromJson(data, Worker[].class));
+            return allWorkers;
+        } catch(IOException e) {
+            System.err.println("workers.json not found!");
+        }
+        return null;
+    }
+
+    public List<Prices> pricesData() {
+
+        data = null;
+        List<Prices> allPrices;
+
+        try {
+            data = file.readAsString("./src/main/data/txt/Prices.json");
+            allPrices = Arrays.asList(gson.fromJson(data, Prices[].class));
+            return allPrices;
+        }catch(IOException e){
+            System.err.println("Prices.json not found!");
+        }
+        return null;
 
     }
 }

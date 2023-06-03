@@ -1,11 +1,5 @@
 package main.core;
 
-import main.utils.ParseData;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Billing {
 
     private int idReport;
@@ -17,11 +11,20 @@ public class Billing {
     private String secondDate;
     private int firstValue;
     private int secondValue;
-    private ParseData data;
-    public Billing(){ //Constructor
 
-        ParseData data = new ParseData();
+    public Billing(int idReport, String idCustomer, String idGasMeter, String idPlc, String idDataSim, String firstDate, String secondDate, int firstValue, int secondValue) {
+        this.idReport = idReport;
+        this.idCustomer = idCustomer;
+        this.idGasMeter = idGasMeter;
+        this.idPlc = idPlc;
+        this.idDataSim = idDataSim;
+        this.firstDate = firstDate;
+        this.secondDate = secondDate;
+        this.firstValue = firstValue;
+        this.secondValue = secondValue;
+    }
 
+    public Billing(){
     }
 
     public int getIdReport() {
@@ -32,13 +35,16 @@ public class Billing {
         this.idReport = idReport;
     }
 
+
     public String getIdCustomer() {
         return idCustomer;
+
     }
 
     public void setIdCustomer(String idCustomer) {
         this.idCustomer = idCustomer;
     }
+
 
     public String getIdGasMeter() {
         return idGasMeter;
