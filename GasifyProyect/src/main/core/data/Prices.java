@@ -1,4 +1,4 @@
-package main.core;
+package main.core.data;
 
 public class Prices {
 

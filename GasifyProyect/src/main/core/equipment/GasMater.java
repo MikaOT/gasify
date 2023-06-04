@@ -1,22 +1,24 @@
-package main.core;
+package main.core.equipment;
 
 public class GasMater {
 
-    private String idGasMater;
+    private String idGasMeter;
     private String brand;
     private String ref;
     private String ean13;
     private String serie;
     private String nameModel;
     private int readInstallationDay;
+    private String plcId;
 
-    public GasMater(String idGasMater, String brand, String ref, String ean13, String serie, int readInstallationDay ) {
-        this.idGasMater = idGasMater;
+    public GasMater(String idGasMater, String brand, String ref, String ean13, String serie, int readInstallationDay,String plcId ) {
+        this.idGasMeter = idGasMater;
         this.brand=brand;
         this.ref=ref;
         this.ean13=ean13;
         this.serie=serie;
         this.readInstallationDay = readInstallationDay;
+        this.plcId = plcId;
 
     }
 
@@ -25,11 +27,11 @@ public class GasMater {
     }
 
     public String getIdGasMater() {
-        return idGasMater;
+        return idGasMeter;
     }
 
     public void setIdGasMater(String idGasMater) {
-        this.idGasMater = idGasMater;
+        this.idGasMeter = idGasMater;
     }
 
     public String getBrand() {
@@ -79,7 +81,7 @@ public class GasMater {
 
     public String toStringGasMater() {
         return "GasMater{" +
-                "idGasMater='" + idGasMater + '\'' +
+                "idGasMater='" + idGasMeter + '\'' +
                 ", brand='" + brand + '\'' +
                 ", ref='" + ref + '\'' +
                 ", ean13='" + ean13 + '\'' +

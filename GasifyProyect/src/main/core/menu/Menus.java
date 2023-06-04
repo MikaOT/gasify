@@ -1,12 +1,14 @@
-package main.core;
+package main.core.menu;
 
+import main.core.data.Billing;
+import main.core.Customer;
 import main.utils.ProcessData;
 import main.utils.TableList;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Menus {
+public abstract class Menus {
 
     private TableList table;
     private ProcessData find;
@@ -24,7 +26,16 @@ public class Menus {
     protected void principal() {
         table = new TableList(2, "Number", "Option Name").sortBy(0).withUnicode(true);
         table.addRow("1.", "Login");
-        table.addRow("2.", "Exit");
+        table.addRow("2.", "Register");
+        table.addRow("3.", "Exit");
+        table.print();
+    }
+
+    protected void registerCheck(String user, String email, String dep) {
+        table = new TableList(2, "Type", "Input");
+        table.addRow("Username", user);
+        table.addRow("Email", email);
+        table.addRow("Department", dep);
         table.print();
     }
 

@@ -1,4 +1,4 @@
-package main.core;
+package main.core.data;
 
 public class Billing {
 
@@ -26,6 +26,8 @@ public class Billing {
 
     public Billing(){
     }
+
+
 
     public int getIdReport() {
         return idReport;

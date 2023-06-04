@@ -1,7 +1,7 @@
 package main.utils;
 
-import main.core.Billing;
-import main.core.Data;
+import main.core.data.Billing;
+import main.core.data.Data;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

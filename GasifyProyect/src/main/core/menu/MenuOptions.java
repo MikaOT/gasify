@@ -1,5 +1,10 @@
-package main.core;
+package main.core.menu;
 
+import main.core.Worker;
+import main.core.data.Billing;
+import main.core.Customer;
+import main.core.data.Data;
+import main.core.login.Manager;
 import main.utils.InvoiceGeneratorHTTP;
 import main.utils.ProcessData;
 
@@ -9,33 +14,89 @@ import java.util.Scanner;
 
 // @@ https://blog.terresquall.com/2022/08/javas-scanner-nextline-call-is-being-skipped/
 
-public class ConsoleMenu {
+public class MenuOptions extends Menus {
 
     private Scanner userInput;
     private Data search;
     private ProcessData find;
-    public ConsoleMenu() {
+    private Manager register;
+    public MenuOptions() {
         userInput = new Scanner(System.in);
         search = new Data();
         find = new ProcessData();
+        register = new Manager();
     }
 
     public void principalMenu() {
 
         int choice = 0;
 
-        while (choice != 2) {
+        while (choice != 3) {
 
             try {
                 principal();
                 choice = userInput.nextInt();
 
-                if (choice == 1) loginOption();
+                if (choice == 1) login();
+                if (choice == 2) registerOption();
 
             } catch (NumberFormatException | InputMismatchException e) {
                 System.err.println("Invalid option!");
                 userInput.nextLine();
             }
+        }
+    }
+
+    private void login() {
+        userInput.nextLine();
+        System.out.println("Please, enter the username:");
+        String user = userInput.nextLine();
+        System.out.println("Please, enter the password:");
+        String pass = userInput.nextLine();
+        if (register.login(user, pass)) {
+            loginOption();
+        } else {
+            System.err.println("Incorrect username and/or password");
+        }
+
+    }
+
+    private void registerOption() {
+
+        String usernameInput;
+        String email;
+        String password;
+        String dep;
+
+        userInput.nextLine();
+        do {
+            System.out.println("Please, enter the desired username:");
+            usernameInput = userInput.nextLine();
+
+            if (usernameInput.contains(" ")) {
+                System.err.println("The user must not contain spaces!");
+            }
+        } while (usernameInput.contains(" "));
+
+        System.out.println("Please, enter the desired email:");
+        email = userInput.nextLine();
+        System.out.println("Please, enter the desired password:");
+        password = userInput.nextLine();
+        System.out.println("Please, enter your department:");
+        dep = userInput.nextLine();
+
+        registerCheck(usernameInput, email, dep);
+        System.out.println("Is this correct? (Y/n)");
+        String option = userInput.nextLine();
+
+        if (option.equalsIgnoreCase("y")) {
+            List<Worker> filter = search.findWorkerByEmail(email);
+            List<Worker> filter2 = search.findWorkerByUser(usernameInput);
+            if (filter2.size() == 0 && filter.size() == 0) {
+                register.userCreate(usernameInput, password, email, dep);
+            }
+            if (filter2.size() > 0) System.err.println("Already existing username!");
+            if (filter.size() > 0) System.err.println("Email address already exists!");
         }
     }
 
@@ -88,11 +149,11 @@ public class ConsoleMenu {
         }
     }
 
- private void workWithUserOption(String ID) {
+    private void workWithUserOption(String ID) {
 
-     List<Customer> data = search.findCustomerByID(ID);
+        List<Customer> data = search.findCustomerByID(ID);
 
-     if (data.size() == 1) {
+        if (data.size() == 1) {
          String customerId = data.get(0).getIdCustomer();
          String customerName = data.get(0).getNameCustomer();
          String customerAddress = data.get(0).getAddress();
@@ -111,13 +172,13 @@ public class ConsoleMenu {
 
                  if (choiceWorkWith == 3) generateInvoiceOption(customerId, customerName, customerAddress);
 
-             } catch (NumberFormatException | InputMismatchException e) {
-                 System.err.println("Invalid option!");
-                 userInput.nextLine();
+                } catch (NumberFormatException | InputMismatchException e) {
+                    System.err.println("Invalid option!");
+                    userInput.nextLine();
+                 }
              }
          }
-     }
- }
+    }
 
     private void findBillingByDate(String customerId) {
 

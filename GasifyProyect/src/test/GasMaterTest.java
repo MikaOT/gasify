@@ -1,6 +1,6 @@
 package test;
 
-import main.core.GasMater;
+import main.core.equipment.GasMater;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

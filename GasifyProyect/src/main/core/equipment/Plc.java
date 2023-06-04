@@ -1,16 +1,17 @@
-package main.core;
+package main.core.equipment;
 
 public class Plc {
 
     private String idPlc;
     private String maker;
     private String model;
+    private String idDataSim;
 
-    public Plc(String idPlc, String maker,String model) {
+    public Plc(String idPlc, String maker,String model,String idDataSim) {
         this.idPlc = idPlc;
         this.maker = maker;
         this.model=model;
-
+        this.idDataSim = idDataSim;
     }
 
     public Plc() {
@@ -40,8 +41,6 @@ public class Plc {
     public void setIdPlc(String idPlc) {
         this.idPlc = idPlc;
     }
-
-
 
     public String toStringPlc() {
         return "Plc{" +

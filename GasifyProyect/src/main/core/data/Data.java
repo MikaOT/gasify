@@ -1,14 +1,17 @@
-package main.core;
+package main.core.data;
 
+import main.core.Customer;
+import main.core.Worker;
+import main.core.equipment.DataSim;
+import main.core.equipment.GasMater;
+import main.core.equipment.Plc;
 import main.utils.DateValidator;
 import main.utils.ParseData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Data extends ParseData {
+public class Data extends ParseData implements Finders {
 
     DateValidator fullDate;
     DateValidator monthYear;
@@ -45,29 +48,62 @@ public class Data extends ParseData {
         return filter;
     }
 
+    public List<Worker> findWorkerByID (String id) {
+        ArrayList<Worker> filter = new ArrayList<>();
+        if (workerData() != null) {
+            for (Worker employee : workerData()) {
+                if (employee.getIdEmployee().equalsIgnoreCase(id)) {
+                    filter.add(employee);
+                }
+            }
+        }
+        return filter;
+    }
+
+    public List<Worker> findWorkerByUser (String user) {
+        ArrayList<Worker> filter = new ArrayList<>();
+        if (workerData() != null) {
+            for (Worker employee : workerData()) {
+                if (employee.getName().equalsIgnoreCase(user)) {
+                    filter.add(employee);
+                }
+            }
+        }
+        return filter;
+    }
+
+    public List<Worker> findWorkerByEmail (String email) {
+        ArrayList<Worker> filter = new ArrayList<>();
+        if (workerData() != null) {
+            for (Worker employee : workerData()) {
+                if (employee.getEmail().equalsIgnoreCase(email)) {
+                    filter.add(employee);
+                }
+            }
+        }
+        return filter;
+    }
+
     // #################################### General Data search methods ########################################
 
-    // 01/01/2022 hasta 01/12/2030
-    public long diffDate (String date1, String date2) {
-        LocalDate d1 = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate d2 = LocalDate.parse(date2, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        Duration diff = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
-        return diff.toDays();
+    public float findPriceByDate (String period) {
 
-        // año 365 dias
-        // Enero 1<Enero<31
-        // Febrero 32<Febrero<60
+        String date = (monthYear.isValid(period))
+                ? period
+                : (fullDate.isValid(period))
+                ? format.dateFormat(period)[1] + "/" + format.dateFormat(period)[2]
+                : null;
 
-    }
-    public String verMes(String fecha){
-
-        return dateFormat(fecha)[1];
-
-
-    }
-    public String[] dateFormat(String date) {
-
-        return date.split("/");
+        if (date != null) {
+            for (Prices p: pricesData()) {
+                if (p.getPeriod().contains(date)){
+                    return p.getValue();
+                }
+            }
+        } else {
+            System.err.println("Format date not valid!");
+        }
+        return -1;
     }
 
 
@@ -96,17 +132,19 @@ public class Data extends ParseData {
 
         ArrayList<GasMater> filter = new ArrayList<>();
 
-        for (GasMater gas : data.gasMaterData()) {
-            if (gas.getIdGasMater().equalsIgnoreCase(gasMeterId)) {
-                filter.add(gas);
+        if (gasMaterData() != null) {
+            for (GasMater gas : gasMaterData()) {
+                if (gas.getIdGasMater().equalsIgnoreCase(gasMeterId)) {
+                    filter.add(gas);
+                }
             }
+            if (filter.size() == 0) System.err.println("User without associated gas meter!");
         }
-
         return filter;
 
     }
 
-    public List<DataSim> findSim(String simId) throws IOException {
+    public List<DataSim> findSim(String simId) {
 
         ArrayList<DataSim> filter = new ArrayList<>();
 
@@ -134,7 +172,6 @@ public class Data extends ParseData {
             }
             if (filter.size() == 0) System.err.println("PLC ID not found!");
         }
-
         return filter;
     }
 

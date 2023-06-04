@@ -2,18 +2,22 @@ package main.utils;
 
 import com.google.gson.Gson;
 import main.core.*;
+import main.core.data.Billing;
+import main.core.data.Prices;
+import main.core.equipment.DataSim;
+import main.core.equipment.GasMater;
+import main.core.equipment.Plc;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class ParseData {
+public abstract class ParseData extends FileReader implements Parser {
 
-    private FileReader file;
+
     private Gson gson;
     private String data;
     public ParseData(){
-        file = new FileReader();
         gson = new Gson();
     }
 
@@ -30,7 +34,7 @@ public class ParseData {
         List<Billing> billingToDate;
 
         try {
-            data = file.readAsString("./src/main/data/txt/CustomerBilling.json");
+            data = readAsString("./src/main/data/json/CustomerBilling.json");
             billingToDate = Arrays.asList(gson.fromJson(data, Billing[].class));
             return billingToDate;
 
@@ -46,7 +50,7 @@ public class ParseData {
         List<Customer> allCustomers;
 
         try {
-            data = file.readAsString("./src/main/data/txt/customers.json");
+            data = readAsString("./src/main/data/json/customers.json");
             allCustomers = Arrays.asList(gson.fromJson(data, Customer[].class));
             return allCustomers;
 
@@ -62,7 +66,7 @@ public class ParseData {
         List<DataSim> allDataSims;
 
         try {
-            data = file.readAsString("./src/main/data/txt/dataSims.json");
+            data = readAsString("./src/main/data/json/dataSims.json");
             allDataSims = Arrays.asList(gson.fromJson(data, DataSim[].class));
             return allDataSims;
         }catch(IOException e){
@@ -77,7 +81,7 @@ public class ParseData {
         List<GasMater> allGasMater;
 
         try {
-            data = file.readAsString("./src/main/data/txt/gasMaters.json");
+            data = readAsString("./src/main/data/json/gasMaters.json");
             allGasMater = Arrays.asList(gson.fromJson(data, GasMater[].class));
             return allGasMater;
         }catch(IOException e){
@@ -104,7 +108,7 @@ public class ParseData {
         List<Worker> allWorkers;
 
         try {
-            data = file.readAsString("./src/main/data/txt/workers.json");
+            data = readAsString("./src/main/data/json/workers.json");
             allWorkers = Arrays.asList(gson.fromJson(data, Worker[].class));
             return allWorkers;
         } catch(IOException e) {
@@ -119,7 +123,7 @@ public class ParseData {
         List<Prices> allPrices;
 
         try {
-            data = file.readAsString("./src/main/data/txt/Prices.json");
+            data = readAsString("./src/main/data/json/Prices.json");
             allPrices = Arrays.asList(gson.fromJson(data, Prices[].class));
             return allPrices;
         }catch(IOException e){
