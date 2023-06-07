@@ -1,6 +1,6 @@
 package test;
 
-import main.core.DataSim;
+import main.core.equipment.DataSim;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
