@@ -1,7 +1,8 @@
 package main.core;
 
-public class Worker {
+import main.core.login.User;
 
+public class Worker extends User {
 
     private String idEmployee;
     private String name;
@@ -23,9 +24,9 @@ public class Worker {
     public String toString() {
         return "Worker{" +
                 "idEmployee='" + idEmployee + '\'' +
-                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", nameCompany='" + nameCompany + '\'' +
-                ", area='" + area + '\'' +
+                ", area='" + department + '\'' +
                 '}';
     }
 
@@ -35,14 +36,6 @@ public class Worker {
 
     public void setIdEmployee(String idEmployee) {
         this.idEmployee = idEmployee;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNameCompany() {
@@ -60,4 +53,5 @@ public class Worker {
     public void setArea(String area) {
         this.area = area;
     }
+
 }
