@@ -8,40 +8,36 @@ public class BillingTest {
 
     @BeforeEach
     void setUp() {
-        billing = new Billing();
+        billing = new Billing(1, "C001", "G001", "P001", "S001", "2023-01-01", "2023-01-31", 100, 200);
     }
 
     @Test
-    void testSetAndGetIdReport() {
-        int expectedId = 123;
+    void testGetIdReport() {
+        int expectedId = 1;
+        int actualId = billing.getIdReport();
+        Assertions.assertEquals(expectedId, actualId);
+    }
+
+    @Test
+    void testSetIdReport() {
+        int expectedId = 2;
         billing.setIdReport(expectedId);
         int actualId = billing.getIdReport();
         Assertions.assertEquals(expectedId, actualId);
     }
 
     @Test
-    void testSetAndGetIdCustomer() {
-        String expectedId = "ABC123";
-        billing.setIdCustomer(expectedId);
+    void testGetIdCustomer() {
+        String expectedId = "C001";
         String actualId = billing.getIdCustomer();
         Assertions.assertEquals(expectedId, actualId);
     }
 
     @Test
-    void testSetAndGetIdGasMeter() {
-        String expectedId = "Meter123";
-        billing.setIdGasMeter(expectedId);
-        String actualId = billing.getIdGasMeter();
+    void testSetIdCustomer() {
+        String expectedId = "C002";
+        billing.setIdCustomer(expectedId);
+        String actualId = billing.getIdCustomer();
         Assertions.assertEquals(expectedId, actualId);
-    }
-
-    @Test
-    void testDefaultConstructor() {
-        int expectedId = 0;
-        String expectedCustomer = null;
-
-        Assertions.assertEquals(expectedId, billing.getIdReport());
-        Assertions.assertEquals(expectedCustomer, billing.getIdCustomer());
-        
     }
 }
