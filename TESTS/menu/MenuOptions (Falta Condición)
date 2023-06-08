@@ -1,0 +1,39 @@
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class MenuOptionsTest {
+
+    @Test
+    public void testLoginWithValidCredentials() {
+        String input = "john\npassword\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        
+        MenuOptions menuOptions = new MenuOptions();
+
+        menuOptions.login();
+        
+        assertTrue(/* condición de prueba */);
+    }
+
+    @Test
+    public void testRegisterOptionWithValidData() {
+        String input = "john_doe\njohn@example.com\npassword123\ndepartment\nY\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        MenuOptions menuOptions = new MenuOptions();
+
+        menuOptions.registerOption();
+
+        assertTrue(/* condición de prueba */);
+    }
+
+}
